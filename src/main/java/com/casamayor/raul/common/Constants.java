@@ -1,4 +1,4 @@
-package com.casamayor.raul;
+package com.casamayor.raul.common;
 
 public class Constants {
     public static class TokensCode{
