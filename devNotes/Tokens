@@ -1,0 +1,26 @@
+Token           Codigo      Atributo        Categoria
+--------------------------------------------------
+int             001                         obligatorio
+boolean         002                         obligatorio
+string          003                         obligatorio
+if              101                         obligatorio
+else            102                         grupo
+input           103                         obligatorio
+let             104                         obligatorio
+function        105                         obligatorio
+return          106                         obligatorio
+print           107                         obligatorio
+Identificador   201         PosicionTS      obligatorio
+ConstEntera     202         Valor           obligatorio
+Cadena          203         String          grupo
+;               801                         obligatorio
+(               802                         obligatorio
+)               803                         obligatorio
+,               804                         obligatorio
+{               805                         obligatorio
+}               806                         obligatorio
+=               811                         obligatorio
++=              812                         grupo
+-               821                         op. aritmetico               
+<               822                         op. relacional
+!               823                         op. logico
