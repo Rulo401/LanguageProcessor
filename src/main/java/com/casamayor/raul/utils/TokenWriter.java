@@ -20,12 +20,20 @@ public class TokenWriter {
     private FileWriter fw;
     private boolean firstWrite;
 
+    /**
+     * Constructor
+     * @throws IOException When creating the file writer or truncating the file.
+     */
     public TokenWriter() throws IOException{
         fw = new FileWriter(FILE_PATH);
         fw.flush();
         firstWrite = true;
     }
     
+    /**
+     * Method used to write the token into the file using the appropiate format.
+     * @param t Token to write on the file
+     */
     public void write(Token t){
         String format = firstWrite ? TOKEN_FORMAT.substring(1) : TOKEN_FORMAT;
         String attribute;
@@ -44,6 +52,9 @@ public class TokenWriter {
         }
     }
 
+    /**
+     * Method use to close the opened streams
+     */
     public void close(){
         try {
             fw.close();
