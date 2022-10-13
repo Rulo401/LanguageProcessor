@@ -2,19 +2,19 @@ package com.casamayor.raul.common;
 
 public class Constants {
     public static class TokensCode{
-        public static final int PR_INT = 001;
-        public static final int PR_BOOL = 002;
-        public static final int PR_STRING = 003;
-        public static final int PR_IF = 101;
-        public static final int PR_ELSE = 102;
-        public static final int PR_INPUT = 103;
-        public static final int PR_LET = 104;
-        public static final int PR_FUN = 105;
-        public static final int PR_RET = 106;
-        public static final int PR_PRINT = 107;
-        public static final int IDENT = 201;
-        public static final int C_ENT = 202;
-        public static final int C_CAD = 203;
+        public static final int PR_INT = 101;
+        public static final int PR_BOOL = 102;
+        public static final int PR_STRING = 103;
+        public static final int PR_IF = 201;
+        public static final int PR_ELSE = 202;
+        public static final int PR_INPUT = 203;
+        public static final int PR_LET = 204;
+        public static final int PR_FUN = 205;
+        public static final int PR_RET = 206;
+        public static final int PR_PRINT = 207;
+        public static final int IDENT = 301;
+        public static final int C_ENT = 302;
+        public static final int C_CAD = 303;
         public static final int PCOMA = 801;
         public static final int APARENTESIS = 802;
         public static final int CPARENTESIS = 803;
