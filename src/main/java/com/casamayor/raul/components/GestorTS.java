@@ -9,8 +9,8 @@ import com.casamayor.raul.utils.STWriter;
 /**
 * Class responsible of manage the Symbols tables around the Language processor.
 * @author Raul Casamayor Navas
-* @version 0.1
-* @since 12/10/2022
+* @version 0.2
+* @since 13/10/2022
 */
 public class GestorTS {
 
@@ -43,5 +43,6 @@ public class GestorTS {
      */
     public void closeCurrentST(){
         stw.write(ts);
+        stw.close();
     }
 }
