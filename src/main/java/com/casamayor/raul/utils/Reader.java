@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
+ * Class used to manage the reading of the file.
  * @author Raúl Casamayor Navas
  * @version 1.0
  * @since 12/10/2022
