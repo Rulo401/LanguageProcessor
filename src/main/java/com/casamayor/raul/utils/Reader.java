@@ -67,6 +67,9 @@ public class Reader {
         currentLine = br.readLine();
         if(currentLine != null){
             lineCounter++;
+            if(currentLine.length() == 0){
+                readNextLine();
+            }
         }
     }
 }
