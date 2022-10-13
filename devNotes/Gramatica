@@ -1,0 +1,11 @@
+d = {0...9}
+y = {A...Z}
+n = {a...z}
+del = {blanco, tab, <eol>}
+p = printable characters not specified in other sets
+
+S -> del S | + A | _ I | y I | n P | d D | ' C | { | } | ( | ) | ; | , | = | - | ! | <
+I -> n I | d I | y I | _ I | λ
+P -> n P | d I | y I | _ I | λ
+D -> d D | λ
+C -> blanco C | y C | n C | d C | p C | '
