@@ -26,7 +26,6 @@ public class STWriter {
      */
     public STWriter() throws IOException{
         fw = new FileWriter(FILE_PATH);
-        fw.flush();
     }
     
     /**

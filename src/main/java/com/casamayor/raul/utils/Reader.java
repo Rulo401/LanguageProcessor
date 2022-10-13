@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * Class used to manage the reading of the file.
  * @author Raúl Casamayor Navas
- * @version 1.0
+ * @version 1.1
  * @since 12/10/2022
  */
 public class Reader {
@@ -41,7 +41,11 @@ public class Reader {
         char res = currentLine.charAt(lineCursor);
         lineCursor++;
         if(lineCursor >= currentLine.length()){
-            
+            try {
+                readNextLine();
+            } catch (IOException e) {   
+                currentLine = null;
+            }
         }
         return res;
     }

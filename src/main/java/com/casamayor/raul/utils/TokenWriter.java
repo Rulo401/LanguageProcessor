@@ -26,7 +26,6 @@ public class TokenWriter {
      */
     public TokenWriter() throws IOException{
         fw = new FileWriter(FILE_PATH);
-        fw.flush();
         firstWrite = true;
     }
     
