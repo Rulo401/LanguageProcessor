@@ -14,8 +14,8 @@ import com.casamayor.raul.utils.TokenWriter;
 /**
  * Class that models a lexical analyzer (part of a language processor).
  * @author Raúl Casamayor Navas
- * @version 1.0
- * @since 13/10/2022
+ * @version 1.1
+ * @since 15/10/2022
  */
 public class AnalizadorLexico {
     
@@ -81,7 +81,8 @@ public class AnalizadorLexico {
                 case 'v':
                     value *= 10; 
                     value += Character.getNumericValue(char_read);
-                    break; 
+                    break;
+                case 'S': rd.skipLine();
             }
             char_read = rd.getNextChar();
         }
@@ -155,6 +156,8 @@ public class AnalizadorLexico {
                 case 3: return nextTransitionF3(char_read);
                 case 4: return nextTransitionF4(char_read);
                 case 5: return nextTransitionF5(char_read);
+                case 6: return nextTransitionF6(char_read);
+                case 7: return nextTransitionF7(char_read);
                 default: return new SAPair(null, null);
             }
         }
@@ -166,20 +169,17 @@ public class AnalizadorLexico {
             if(Character.isDigit(char_read)){
                 return new SAPair(1, 'V');
             }
-            if(char_read == '+'){
-                return new SAPair(2, 'R');//'R' is symbolic
-            }
             if(Character.isUpperCase(char_read) || char_read == '_'){
                 return new SAPair(3, 'L');
             }
             if(Character.isLowerCase(char_read)){
                 return new SAPair(4, 'L');
             }
-            if(char_read == '\''){
-                return new SAPair(5,'R');//'R' is symbolic
-            }
             int state;
             switch(char_read){
+                case '+': state = 2; break;
+                case '\'': state = 5; break;
+                case '/': state = 6; break;
                 case '{': state = 106; break;
                 case '}': state = 107; break;
                 case '(': state = 108; break;
@@ -232,6 +232,12 @@ public class AnalizadorLexico {
                 act = null;
             }
             return new SAPair(state, act);
+        }
+        private SAPair nextTransitionF6(char char_read){
+            return new SAPair(char_read == '/' ? 7 : null, 'R');
+        }
+        private SAPair nextTransitionF7(char char_read){
+            return new SAPair(0, 'S');
         }
     }
 }

@@ -7,8 +7,8 @@ import java.io.IOException;
 /**
  * Class used to manage the reading of the file.
  * @author Raúl Casamayor Navas
- * @version 1.1
- * @since 12/10/2022
+ * @version 1.2
+ * @since 15/10/2022
  */
 public class Reader {
 
@@ -56,6 +56,17 @@ public class Reader {
      */
     public int getCurrentLineNumber(){
         return lineCounter;
+    }
+    
+    /**
+     * Method used to skip the rest of the current line
+     */
+    public void skipLine(){
+        try {
+            readNextLine();
+        } catch (IOException e) {   
+            currentLine = null;
+        }
     }
 
     /**
