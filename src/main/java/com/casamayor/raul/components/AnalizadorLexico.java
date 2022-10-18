@@ -14,8 +14,8 @@ import com.casamayor.raul.utils.TokenWriter;
 /**
  * Class that models a lexical analyzer (part of a language processor).
  * @author Raúl Casamayor Navas
- * @version 1.1
- * @since 15/10/2022
+ * @version 1.2
+ * @since 17/10/2022
  */
 public class AnalizadorLexico {
     
@@ -68,6 +68,9 @@ public class AnalizadorLexico {
 
             if(action == null) continue;
             switch(action){
+                case 'C': 
+                    lex = new StringBuilder();
+                    break;
                 case 'L':
                     lex = new StringBuilder();
                     lex.append(char_read);
@@ -192,7 +195,7 @@ public class AnalizadorLexico {
                 case '<': state = 115; break;
                 default: return new SAPair(null, null);
             }
-            return new SAPair(state, 'R');//'R' is symbolic
+            return new SAPair(state, 'C');
         }
         private SAPair nextTransitionF1(char char_read){
             if(Character.isDigit(char_read)){
