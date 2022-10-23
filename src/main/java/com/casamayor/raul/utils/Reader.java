@@ -7,8 +7,8 @@ import java.io.IOException;
 /**
  * Class used to manage the reading of the file.
  * @author Raúl Casamayor Navas
- * @version 1.2
- * @since 15/10/2022
+ * @version 1.3
+ * @since 23/10/2022
  */
 public class Reader {
 
@@ -18,6 +18,7 @@ public class Reader {
     private int lineCounter;
     private String currentLine;
     private int lineCursor;
+    private boolean lineChange;
 
     /**
      * Constructor
@@ -35,6 +36,10 @@ public class Reader {
      * @return  The next character or null if eof has been reached
      */
     public Character getNextChar(){
+        if(lineChange){
+            lineChange = false;
+            return '\n';
+        }
         if(currentLine == null){
             return null;
         }
@@ -78,6 +83,7 @@ public class Reader {
         currentLine = br.readLine();
         if(currentLine != null){
             lineCounter++;
+            lineChange = true;
             if(currentLine.length() == 0){
                 readNextLine();
             }
