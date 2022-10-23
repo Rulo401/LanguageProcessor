@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import com.casamayor.raul.components.AnalizadorLexico;
 import com.casamayor.raul.components.GestorTS;
-import com.casamayor.raul.exceptions.TestExcp;
+import com.casamayor.raul.exceptions.LexException;
 
 /**
  * Language processor for JavaScript-PDL
@@ -33,8 +33,8 @@ public class App {
         }
         try{
         while(lexAnalyzer.nextToken() != null){}
-        }catch(TestExcp e){
-            e.printStackTrace();
+        }catch(LexException e){
+            System.out.println(e);
         }finally{
             lexAnalyzer.close();
             gts.closeCurrentST();

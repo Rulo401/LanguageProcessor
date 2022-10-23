@@ -7,7 +7,7 @@ import java.util.List;
 import com.casamayor.raul.common.Constants;
 import com.casamayor.raul.common.SAPair;
 import com.casamayor.raul.common.Token;
-import com.casamayor.raul.exceptions.TestExcp;
+import com.casamayor.raul.exceptions.LexException;
 import com.casamayor.raul.utils.Reader;
 import com.casamayor.raul.utils.TokenWriter;
 
@@ -50,9 +50,9 @@ public class AnalizadorLexico {
     /**
      * Method used to ask the lexical analyzer for a token
      * @return Next token object or null if there are no tokens left
-     * @throws TestExcp
+     * @throws LexException
      */
-    public Token nextToken() throws TestExcp{
+    public Token nextToken() throws LexException{
         Token t;
         if(char_read == null){
             return null;
@@ -63,7 +63,7 @@ public class AnalizadorLexico {
             action = transition.getAction();
 
             if(current_state == null){
-                throw new TestExcp();
+                throw new LexException(0,rd.getCurrentLineNumber(), rd.getCurrentLine());
             }
 
             if(action == null) continue;

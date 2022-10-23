@@ -15,9 +15,8 @@ public class Reader {
     private FileReader fr;
     private BufferedReader br;
     
-    private int lineCounter;
-    private String currentLine;
-    private int lineCursor;
+    private int lineCounter, lineCursor;
+    private String currentLine, previousLine;
     private boolean lineChange;
 
     /**
@@ -60,7 +59,11 @@ public class Reader {
      * @return Current line number
      */
     public int getCurrentLineNumber(){
-        return lineCounter;
+        return lineChange ? lineCounter - 1 : lineCounter;
+    }
+
+    public String getCurrentLine(){
+        return lineChange ? previousLine : currentLine;
     }
     
     /**
@@ -80,6 +83,7 @@ public class Reader {
      */
     private void readNextLine() throws IOException{
         lineCursor = 0;
+        previousLine = currentLine;
         currentLine = br.readLine();
         if(currentLine != null){
             lineCounter++;
