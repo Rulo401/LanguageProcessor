@@ -14,8 +14,8 @@ import com.casamayor.raul.utils.TokenWriter;
 /**
  * Class that models a lexical analyzer (part of a language processor).
  * @author Raúl Casamayor Navas
- * @version 1.2
- * @since 17/10/2022
+ * @version 1.3
+ * @since 23/10/2022
  */
 public class AnalizadorLexico {
     
