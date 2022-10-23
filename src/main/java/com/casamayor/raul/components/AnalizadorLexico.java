@@ -73,10 +73,11 @@ public class AnalizadorLexico {
                     break;
                 case 'L':
                     lex = new StringBuilder();
-                    lex.append(char_read);
-                    break;
                 case 'l': 
                     lex.append(char_read);
+                    if(lex.length() > Constants.Restriction.C_CAD_LENGTH){
+                        throw new LexException(Constants.TokensCode.C_CAD, rd.getCurrentLineNumber(), rd.getCurrentLine());
+                    }
                     break;
                 case 'V': 
                     value = Character.getNumericValue(char_read); 
@@ -84,6 +85,9 @@ public class AnalizadorLexico {
                 case 'v':
                     value *= 10; 
                     value += Character.getNumericValue(char_read);
+                    if(value > Constants.Restriction.C_ENT_MAX_VALUE){
+                        throw new LexException(Constants.TokensCode.C_ENT, rd.getCurrentLineNumber(), rd.getCurrentLine());
+                    }
                     break;
                 case 'S': rd.skipLine();
             }

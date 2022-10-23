@@ -1,6 +1,7 @@
 package com.casamayor.raul.common;
 
 public class Constants {
+
     public static class TokensCode{
         public static final int PR_INT = 101;
         public static final int PR_BOOL = 102;
@@ -26,5 +27,10 @@ public class Constants {
         public static final int OA_RESTA = 821;
         public static final int OR_MENOR = 822;
         public static final int OL_NEG = 823;
+    }
+
+    public static class Restriction{
+        public static final int C_CAD_LENGTH = 64;
+        public static final int C_ENT_MAX_VALUE = 32767;
     }
 }
