@@ -1,1 +1,1 @@
-Lexical error at line 31 (              alert (s, 'hola', 999999999);)
+Lexical error at line 1 (let string a = 'Cadena de mas de 64 caracteres incluyendo alguno raro como @ o #32';)
