@@ -1,0 +1,22 @@
+C0: cad = "", Leer
+C1: cad += caracterLeido, if(cad.length > 64){ErrorLexico}, Leer
+L0: lexema = caracterLeido, Leer
+L1: lexema += caracterLeido, Leer
+V0: valor = valor_ascii(caracterLeido), Leer
+V1: valor = valor*10 + valor_ascii(caracterLeido), if(valor > 32767){ErrorLexico}, Leer
+R: Leer
+G1: Generar_token(Const_Entera, valor)
+G2: Generar_token(AsignacionSuma,), Leer
+G3: if((posTS = buscarTS(lexema)) == Null){posTS = insertarTS(lexema)}, Generar_token(Identificador, posTS)
+G4: if((pr = buscarTPR(lexema)) == null){G3}else{ Generar_token(pr,)}
+G5: Generar_token(Cadena, cad), Leer
+G6: Generar_token(Abrir_Llave,), Leer
+G7: Generar_token(Cerrar_Llave,), Leer
+G8: Generar_token(Abrir_Parentesis,), Leer
+G9: Generar_token(Cerrar_Parentesis,), Leer
+G10: Generar_token(Punto_Coma,), Leer
+G11: Generar_token(Coma,), Leer
+G12: Generar_token(Asignacion,), Leer
+G13: Generar_token(Operador_Resta,), Leer
+G14: Generar_token(Operador_Negacion,), Leer
+G15: Generar_token(Operador_Menor,), Leer
