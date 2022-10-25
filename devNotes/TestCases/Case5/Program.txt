@@ -1,0 +1,4 @@
+let string a = 'Cadena de mas de 64 caracteres incluyendo alguno raro como @ o #32';
+int b = 65;
+a = 43;
+a+=b;

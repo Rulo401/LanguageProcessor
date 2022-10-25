@@ -1,0 +1,3 @@
+let int num = 8;
+/Declaro variable string
+let string a;

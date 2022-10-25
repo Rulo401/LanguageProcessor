@@ -1,0 +1,4 @@
+GLOBAL# 1 :
+ * LEXEMA : 'resta'
+ * LEXEMA : 'x'
+ * LEXEMA : 'y'

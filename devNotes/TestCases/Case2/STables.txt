@@ -1,0 +1,8 @@
+GLOBAL# 1 :
+ * LEXEMA : 'a'
+ * LEXEMA : 'b'
+ * LEXEMA : 'c'
+ * LEXEMA : 'd'
+ * LEXEMA : 'incrementar_Variables'
+ * LEXEMA : 'inc'
+ * LEXEMA : 'leer'

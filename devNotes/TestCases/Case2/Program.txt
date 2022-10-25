@@ -1,0 +1,31 @@
+let string a;
+let int b, c, d;
+function incrementar_Variables(int inc){
+    b+=inc;
+    c += inc;
+}
+
+
+print(a);
+input d;
+incrementar_Variables(d);
+if(b < 5){
+    b= b -1;
+    a = 'Menor';
+} else {
+    b = 0;
+    a='Mayor';
+}
+//Funcion que lee e imprime
+function string leer (string a){
+    let b;
+    input b;
+    print(a);
+    print(b);
+    print('leido');
+    return b;
+}
+
+if(!(d < 1)){
+    leer(a);
+}
