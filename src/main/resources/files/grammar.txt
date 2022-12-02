@@ -1,0 +1,49 @@
+P' -> P
+P -> S P
+P -> Fun P
+P -> lambda
+S -> Ss
+S -> let id T ;
+S -> if ( Exp ) If
+T -> int
+T -> boolean
+T -> string
+If -> Ss
+If -> { C } Else
+Else -> else { C }
+Else -> lambda
+Ss -> id = Exp ;
+Ss -> id += Exp ;
+Ss -> id ( V ) ;
+Ss -> print Exp ;
+Ss -> input id ;
+Ss -> return X ;
+X -> Exp
+X -> lambda
+V -> Exp V2
+V -> lambda
+V2 -> , Exp V2
+V2 -> lambda
+Fun -> Fun1 Fun2 Fun3
+Fun1 -> function id H
+Fun2 -> ( A )
+Fun3 -> { C }
+H -> T
+H -> lambda
+A -> T id K
+A -> lambda
+K -> , T id K
+K -> lambda
+C -> S C
+C -> lambda
+Exp -> Exp < Exp2
+Exp -> Exp2
+Exp2 -> Exp2 - Exp3
+Exp2 -> Exp3
+Exp3 -> ! Exp4
+Exp3 -> Exp4
+Exp4 -> id
+Exp4 -> ( Exp )
+Exp4 -> id ( V )
+Exp4 -> ent
+Exp4 -> cad

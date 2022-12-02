@@ -12,7 +12,7 @@ import java.util.List;
 */
 public class STWriter {
 
-    private static final String FILE_PATH = "src/main/resources/STables.txt";
+    private static final String FILE_PATH = "src/main/resources/output/STables.txt";
     private static final String ST_HEADER_FORMAT = "%s# %d :\n";
     private static final String ST_LEX_FORMAT = " * LEXEMA : \'%s\'\n";
     private static final String ST_ATR_FORMAT = "   + %s : %s\n";

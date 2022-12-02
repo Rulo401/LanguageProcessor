@@ -55,7 +55,7 @@ public class AnalizadorLexico {
     public Token nextToken() throws LexException{
         Token t;
         if(char_read == null){
-            return null;
+            return new Token(Constants.TokensCode.EOF, null);
         }
         while(current_state/100 < 1){ 
             SAPair transition = afd.nextTransition(current_state, char_read);

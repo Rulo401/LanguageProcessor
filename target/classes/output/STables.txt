@@ -1,0 +1,3 @@
+GLOBAL# 1 :
+ * LEXEMA : 'a'
+ * LEXEMA : 'b'

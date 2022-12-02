@@ -6,7 +6,7 @@ package com.casamayor.raul.exceptions;
  * @version 1.0
  * @since 23/10/2022
  */
-public class LexException extends Exception{
+public class LexException extends PDLException{
     
     private static final String MSG_FORMAT = "Lexical error at line %d (%s)";
 
