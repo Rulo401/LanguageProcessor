@@ -46,7 +46,7 @@ Exp -> Exp < Exp2
 Exp -> Exp2
 Exp2 -> Exp2 - Exp3
 Exp2 -> Exp3
-Exp3 -> ! Exp4
+Exp3 -> ! Exp3
 Exp3 -> Exp4
 Exp4 -> id
 Exp4 -> ( Exp )

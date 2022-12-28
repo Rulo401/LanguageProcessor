@@ -1,3 +1,10 @@
 GLOBAL# 1 :
- * LEXEMA : 'a'
- * LEXEMA : 'b'
+ * LEXEMA : 'z'
+ * LEXEMA : 'boolean_1'
+ * LEXEMA : 'x'
+ * LEXEMA : 'ss'
+ * LEXEMA : 'xx'
+ * LEXEMA : 'boolean_2'
+ * LEXEMA : 'f1'
+ * LEXEMA : 'b1'
+ * LEXEMA : 'f2'
