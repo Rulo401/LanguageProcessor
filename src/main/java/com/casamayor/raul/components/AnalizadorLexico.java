@@ -14,8 +14,8 @@ import com.casamayor.raul.utils.TokenWriter;
 /**
  * Class that models a lexical analyzer (part of a language processor).
  * @author Raúl Casamayor Navas
- * @version 1.3
- * @since 23/10/2022
+ * @version 1.4
+ * @since 28/12/2022
  */
 public class AnalizadorLexico {
     
@@ -45,6 +45,14 @@ public class AnalizadorLexico {
         current_state = 0;
         char_read = rd.getNextChar();
         this.gts = gts;
+    }
+
+    /**
+     * Line number getter.
+     * @return The line position of the file cursor
+     */
+    public int getLineNumber(){
+        return rd.getCurrentLineNumber();
     }
 
     /**

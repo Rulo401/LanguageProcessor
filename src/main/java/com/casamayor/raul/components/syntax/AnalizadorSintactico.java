@@ -16,8 +16,8 @@ import com.casamayor.raul.utils.ParseWriter;
 /**
 * Class that models a syntax analyzer (part of a language processor).
 * @author Raul Casamayor Navas
-* @version 1.2
-* @since 29/11/2022
+* @version 1.3
+* @since 28/12/2022
 */
 public class AnalizadorSintactico {
 
@@ -78,7 +78,7 @@ public class AnalizadorSintactico {
                 continue;
             }
             if("a".equals(action)) break;
-            throw new SynException(t);
+            throw new SynException(t,al.getLineNumber());
         }
         return parse.deleteCharAt(parse.length()-1).toString();
     }
