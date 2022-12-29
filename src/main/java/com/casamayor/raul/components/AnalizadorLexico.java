@@ -14,8 +14,8 @@ import com.casamayor.raul.utils.TokenWriter;
 /**
  * Class that models a lexical analyzer (part of a language processor).
  * @author Raúl Casamayor Navas
- * @version 1.4
- * @since 28/12/2022
+ * @version 1.5
+ * @since 29/12/2022
  */
 public class AnalizadorLexico {
     
@@ -66,6 +66,12 @@ public class AnalizadorLexico {
             return new Token(Constants.TokensCode.EOF, null);
         }
         while(current_state/100 < 1){ 
+            if(char_read == null){
+                if(current_state == 0){
+                    return new Token(Constants.TokensCode.EOF, null);
+                }
+                throw new LexException(-1, rd.getCurrentLineNumber(), rd.getCurrentLine());
+            }
             SAPair transition = afd.nextTransition(current_state, char_read);
             current_state = transition.getState();
             action = transition.getAction();
