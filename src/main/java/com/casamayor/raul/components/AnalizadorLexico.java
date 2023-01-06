@@ -7,6 +7,7 @@ import java.util.List;
 import com.casamayor.raul.common.Constants;
 import com.casamayor.raul.common.SAPair;
 import com.casamayor.raul.common.Token;
+import com.casamayor.raul.components.symbol.GestorTS;
 import com.casamayor.raul.exceptions.LexException;
 import com.casamayor.raul.utils.Reader;
 import com.casamayor.raul.utils.TokenWriter;

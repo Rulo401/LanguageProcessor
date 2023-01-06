@@ -3,7 +3,7 @@ package com.casamayor.raul;
 import java.io.IOException;
 
 import com.casamayor.raul.components.AnalizadorLexico;
-import com.casamayor.raul.components.GestorTS;
+import com.casamayor.raul.components.symbol.GestorTS;
 import com.casamayor.raul.components.syntax.AnalizadorSintactico;
 import com.casamayor.raul.exceptions.PDLException;
 
