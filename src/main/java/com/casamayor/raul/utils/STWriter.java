@@ -10,11 +10,11 @@ import com.casamayor.raul.components.symbol.STEntry;
 * Object for writting symbol tables with the format specified in the project.
 * @author Raul Casamayor Navas
 * @version 1.0
-* @since 06/01/2023
+* @since 09/01/2023
 */
 public class STWriter {
 
-    private static final String FILE_PATH = "src/main/resources/output/STables.txt";
+    private static final String FILE_PATH = "STables.txt";
     private static final String ST_HEADER_FORMAT = "%s# %d :\n";
     private static final String ST_LEX_FORMAT = " * LEXEMA : \'%s\'\n";
     private static final String ST_ATR_CAD_FORMAT = "   + %s : \'%s\'\n";
@@ -44,15 +44,18 @@ public class STWriter {
                 fw.write(String.format(ST_ATR_CAD_FORMAT, "tipo", att.printType()));
                 if(STEntry.FUNCION.equals(att.getType())){
                     fw.write(String.format(ST_ATR_CAD_FORMAT, "etiqFuncion", att.getLabelF()));
+                    fw.write(String.format(ST_ATR_CAD_FORMAT, "tipoRetorno", att.printReturnF()));
                     fw.write(String.format(ST_ATR_NUM_FORMAT, "numParam", att.getnParamF()));
                     int pNumber = 1;
                     for(String pType : att.getTypeParamF()){
                         fw.write(String.format(ST_ATR_CAD_FORMAT, String.format("tipoParam%d",pNumber++),pType));
                     }
-                    fw.write(String.format(ST_ATR_CAD_FORMAT, "tipoRetorno", att.printReturnF()));
                 }else{
                     fw.write(String.format(ST_ATR_NUM_FORMAT, "despl", att.getOffset()));
                 }
+            }
+            if(counter != 0){
+                fw.write(" ----------------------------------------\n");
             }
         } catch (Exception e) {
             System.err.printf("Error while printing a symbol table \n");
@@ -64,7 +67,7 @@ public class STWriter {
      */
     public void close(){
         try {
-            fw.close();
+            if(fw != null) fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
