@@ -15,8 +15,8 @@ import com.casamayor.raul.utils.TokenWriter;
 /**
  * Class that models a lexical analyzer (part of a language processor).
  * @author Raúl Casamayor Navas
- * @version 1.5
- * @since 29/12/2022
+ * @version 1.6
+ * @since 09/01/2023
  */
 public class AnalizadorLexico {
     
@@ -57,6 +57,14 @@ public class AnalizadorLexico {
     }
 
     /**
+     * Line text getter.
+     * @return The content of the current line
+     */
+    public String getLineText(){
+        return rd.getCurrentLine();
+    }
+
+    /**
      * Method used to ask the lexical analyzer for a token
      * @return Next token object or null if there are no tokens left
      * @throws LexException
@@ -71,14 +79,14 @@ public class AnalizadorLexico {
                 if(current_state == 0){
                     return new Token(Constants.TokensCode.EOF, null);
                 }
-                throw new LexException(-1, rd.getCurrentLineNumber(), rd.getCurrentLine());
+                throw new LexException(-1, rd.getCurrentLineNumber(), rd.getCurrentLine(),null);
             }
             SAPair transition = afd.nextTransition(current_state, char_read);
             current_state = transition.getState();
             action = transition.getAction();
 
             if(current_state == null){
-                throw new LexException(0,rd.getCurrentLineNumber(), rd.getCurrentLine());
+                throw new LexException(0,rd.getCurrentLineNumber(), rd.getCurrentLine(),String.valueOf(char_read));
             }
 
             if(action == null) continue;
@@ -91,7 +99,7 @@ public class AnalizadorLexico {
                 case 'l': 
                     lex.append(char_read);
                     if(lex.length() > Constants.Restriction.C_CAD_LENGTH){
-                        throw new LexException(Constants.TokensCode.C_CAD, rd.getCurrentLineNumber(), rd.getCurrentLine());
+                        throw new LexException(1, rd.getCurrentLineNumber(), rd.getCurrentLine(),null);
                     }
                     break;
                 case 'V': 
@@ -101,7 +109,7 @@ public class AnalizadorLexico {
                     value *= 10; 
                     value += Character.getNumericValue(char_read);
                     if(value > Constants.Restriction.C_ENT_MAX_VALUE){
-                        throw new LexException(Constants.TokensCode.C_ENT, rd.getCurrentLineNumber(), rd.getCurrentLine());
+                        throw new LexException(2, rd.getCurrentLineNumber(), rd.getCurrentLine(),null);
                     }
                     break;
                 case 'S': rd.skipLine();
@@ -122,7 +130,7 @@ public class AnalizadorLexico {
         tw.close();
     }
 
-    private Token generateToken(int state){
+    private Token generateToken(int state) throws LexException{
         Token t;
         if(state == 104){
             String l = lex.toString();
@@ -137,7 +145,13 @@ public class AnalizadorLexico {
                 case "function": t = new Token(Constants.TokensCode.PR_FUN, null); break;
                 case "return": t = new Token(Constants.TokensCode.PR_RET, null); break;
                 case "print": t = new Token(Constants.TokensCode.PR_PRINT, null); break;
-                default: t = new Token(Constants.TokensCode.IDENT, gts.addIdentifier(l));
+                default: 
+                    String id = gts.addIdentifier(l); 
+                    if(id != null){ 
+                        t = new Token(Constants.TokensCode.IDENT, id);
+                    }else{
+                        throw new LexException(3, rd.getCurrentLineNumber(), rd.getCurrentLine(), l);
+                    }
             }
             return t;
         }

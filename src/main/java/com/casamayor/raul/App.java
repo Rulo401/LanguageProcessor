@@ -10,8 +10,8 @@ import com.casamayor.raul.exceptions.PDLException;
 /**
 * Language processor for JavaScript-PDL
 * @author Raúl Casamayor Navas
-* @version 0.3
-* @since 29/11/2022
+* @version 1.0
+* @since 09/01/2023
 */
 public class App {
     
@@ -35,7 +35,7 @@ public class App {
             System.exit(1);
         }
         try {
-            synAnalyzer = new AnalizadorSintactico(lexAnalyzer);
+            synAnalyzer = new AnalizadorSintactico(lexAnalyzer,gts);
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Error ocurred while creating the Lexical analyzer");
@@ -45,35 +45,12 @@ public class App {
         try{
             System.out.println(synAnalyzer.parse());
         }catch(PDLException e){
+            gts.closeCurrentST();
             e.printStackTrace();
         }finally{
             synAnalyzer.close();
             lexAnalyzer.close();
             gts.closeCurrentST();
         }
-        
-        /** Main para analizador lexico
-        try {
-            gts = new GestorTS();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error ocurred while creating the Symbol table manager");
-            System.exit(1);
-        }
-        try {
-            lexAnalyzer = new AnalizadorLexico(args[0], gts);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error ocurred while creating the Lexical analyzer");
-            System.exit(1);
-        }
-        try{
-            while(lexAnalyzer.nextToken() != null){}
-        }catch(LexException e){
-            System.out.println(e);
-        }finally{
-            lexAnalyzer.close();
-            gts.closeCurrentST();
-        }*/
     }
 }
