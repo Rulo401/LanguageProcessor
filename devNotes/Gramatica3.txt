@@ -1,0 +1,50 @@
+P -> S Pb {P.tipo := if S.tipo == tipo_ok AND Pb.tipo != tipo_error then tipo_ok else tipo_error}
+P -> Fun Pb {P.tipo := if Fun.tipo == tipo_ok AND Pb.tipo != tipo_error then tipo_ok else tipo_error}
+P -> lambda {P.tipo := vacio}
+S -> Ss {S.tipo := Ss.tipo}
+S -> let {zDec := true} id {zDec := false} T ; {InsertarTipoTS(id.pos,T.tipo),InsertarDesplTS(id.pos,T.ancho),S.tipo := tipo_ok}
+S -> if ( Exp ) If {S.tipo := if Exp.tipo == bool then If.tipo else tipo_error}
+T -> int {T.tipo := ent, T.ancho := 1}
+T -> boolean {T.tipo := bool, T.ancho := 1}
+T -> string {T.tipo := cad, T.ancho := 64}
+If -> Ss {If.tipo := Ss.tipo}
+If -> { C } Else {If.tipo := if C.tipo == tipo_ok AND Else.tipo != tipo_error then tipo_ok else tipo_error}
+Else -> else { C } {Else.tipo := if C.tipo == tipo_ok then tipo_ok else tipo_error}
+Else -> lambda {Else.tipo := vacio}
+Ss -> id = Exp ; {Ss.tipo := if Exp.tipo == BuscarTipoTS(id.pos) then tipo_ok else tipo_error}
+Ss -> id += Exp ; {Ss.tipo := if Exp.tipo == BuscarTipoTS(id.pos) == ent then tipo_ok else tipo_error}
+Ss -> id ( V ) ; {Ss.tipo := if V.nParam == BuscarNParamTS(id.pos) AND V.tipoParam == BuscarTipoParamTS(id.pos) then tipo_ok else tipo_error}
+Ss -> print Exp ; {Ss.tipo := if Exp.tipo == ent OR Exp.tipo == cad then tipo_ok else tipo_error}
+Ss -> input id ; {Ss.tipo := if BuscarTipoTS(id.pos) == ent OR BuscarTipoTS(id.pos) == cad then tipo_ok else tipo_error}
+Ss -> return X ; {Ss.tipo := if (tsL==NULL AND X.tipo == vacio) OR BuscarTipoRetTS(associatedFun) == X.tipo then tipo_ok else tipo_error}
+X -> Exp {X.tipo := Exp.tipo}
+X -> lambda {X.tipo := vacio}
+V -> Exp V2 {V.tipo := if V2.tipo == vacio then V.tipo := Exp.tipo,V.nParam := 1 else V.tipo := Exp.tipo x V2.tipo,V.nParam := V2.nParam + 1}
+V -> lambda {V.tipo := vacio, V.nParam := 0}
+V2 -> , Exp V2b {V.tipo := if V2b.tipo == vacio then V2.tipo := Exp.tipo,V2.nParam := 1 else V2.tipo := Exp.tipo x V2b.tipo,V2.nParam := V2b.nParam + 1}
+V2 -> lambda {V2.tipo := vacio}
+Fun -> Fun1 Fun2 {InsertarTipoParamTS(Fun1.pos,Fun2.tipo),InsertarNParamTS(Fun1.pos,Fun2.nParam)} Fun3 {Fun.tipo := Fun3.tipo,BorrarTSL()}
+Fun1 -> function {zDec := true} id H {InsertarTipoTS(id.pos,fun),InsertarTipoRetTS(id.pos,H.tipo),InsertarEtiquetaTS(id.pos,GenEtiq()),CrearTSL(),Fun1.pos := id.pos}
+Fun2 -> ( A ) {Fun2.nParam := A.nParam, Fun2.tipo := A.tipo, zDec := false}
+Fun3 -> { C } {Fun3.tipo := if C.tipo == tipo_ok then tipo_ok else tipo_error}
+H -> T {H.tipo := T.tipo}
+H -> lambda {H.tipo := vacio}
+A -> T id K {InsertarTipoTS(id.pos,T.tipo),InsertarDesplTS(id.pos,T.ancho),if K.tipo == vacio then A.tipo := T.tipo,A.nParam := 1 else A.tipo := T.tipo x K.tipo,A.nParam := K.nParam + 1}
+A -> lambda {A.tipo := vacio,A.nParam := 0}
+K -> , T id Kb {InsertarTipoTS(id.pos,T.tipo),InsertarDesplTS(id.pos,T.ancho),if Kb.tipo == vacio then K.tipo := T.tipo,K.nParam := 1 else K.tipo := T.tipo x Kb.tipo,K.nParam := Kb.nParam + 1}
+K -> lambda {K.tipo := vacio}
+C -> S Cb {C.tipo := if Cb.tipo == tipo_error then tipo_error else S.tipo}
+C -> lambda {C.tipo := vacio}
+Exp -> Expb < Exp2 {Exp.tipo := if Expb.tipo == Exp2.tipo == ent then bool else tipo_error}
+Exp -> Exp2 {Exp.tipo := Exp2.tipo}
+Exp2 -> Exp2b - Exp3 {Exp2.tipo := if Exp2b.tipo == Exp3.tipo == ent then ent else tipo_error}
+Exp2 -> Exp3 {Exp2.tipo := Exp3.tipo}
+Exp3 -> ! Exp3b {Exp3.tipo := if Exp3b.tipo == bool then bool else tipo_error}
+Exp3 -> Exp4 {Exp3.tipo := Exp4.tipo}
+Exp4 -> id {Exp4.tipo := BuscarTipoTS(id.pos)}
+Exp4 -> ( Exp ) {Exp4.tipo := Exp.tipo}
+Exp4 -> id ( V ) {Exp4.tipo := if V.nParam == BuscarNParamTS(id.pos) AND V.tipoParam == BuscarTipoParamTS(id.pos) then BuscarTipoRetTS(id.pos) else tipo_error}
+Exp4 -> ent {Exp4.tipo := ent}
+Exp4 -> cad {Exp4.tipo := cad}
+
+La funcion InsertarDesplTS(puntero,ancho) asigna el desplazamiento adecuado a la entrada del puntero e incrementa la variable desplazamiento en ancho
