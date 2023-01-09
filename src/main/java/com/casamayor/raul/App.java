@@ -43,7 +43,7 @@ public class App {
         }
         
         try{
-            System.out.println(synAnalyzer.parse());
+            synAnalyzer.parse();//System.out.println(synAnalyzer.parse());
         }catch(PDLException e){
             gts.closeCurrentST();
             e.printStackTrace();
