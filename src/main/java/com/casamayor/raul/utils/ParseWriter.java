@@ -11,7 +11,7 @@ import java.io.IOException;
 */
 public class ParseWriter {
 
-    private static final String FILE_PATH = "src/main/resources/output/Parse.txt";
+    private static final String FILE_PATH = "Parse.txt";
     private static final String TYPE = "Ascendente";
     private static final String FORMAT = " %d";
 
@@ -45,7 +45,7 @@ public class ParseWriter {
      */
     public void close(){
         try {
-            fw.close();
+            if(fw != null) fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

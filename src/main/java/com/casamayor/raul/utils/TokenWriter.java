@@ -13,7 +13,7 @@ import com.casamayor.raul.common.Token;
 */
 public class TokenWriter {
 
-    private static final String FILE_PATH = "src/main/resources/output/Tokens.txt";
+    private static final String FILE_PATH = "Tokens.txt";
     private static final String TOKEN_FORMAT = "\n<%d , %s>";
 
 
@@ -56,7 +56,7 @@ public class TokenWriter {
      */
     public void close(){
         try {
-            fw.close();
+            if(fw != null) fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

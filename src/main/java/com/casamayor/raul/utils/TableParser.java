@@ -1,8 +1,7 @@
 package com.casamayor.raul.utils;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import com.opencsv.CSVReader;
@@ -11,14 +10,13 @@ import com.opencsv.exceptions.CsvValidationException;
 /**
 * Object for building the tables needed by the syntax analyser from a csv file.
 * @author Raul Casamayor Navas
-* @version 1.0
-* @since 29/11/2022
+* @version 1.1
+* @since 09/01/2023
 */
 public class TableParser {
     
-    private FileReader fr;
-    private BufferedReader br;
-    CSVReader csvr;
+    private InputStreamReader isr;
+    private CSVReader csvr;
     
     private String[] headers;
     
@@ -27,9 +25,8 @@ public class TableParser {
     * @throws IOException When an IO Error occurs
     */
     public TableParser(String filePath) throws IOException{
-        fr = new FileReader(filePath);
-        br = new BufferedReader(fr);
-        csvr = new CSVReader(fr);
+        isr = new InputStreamReader(getClass().getClassLoader().getResourceAsStream(filePath));
+        csvr = new CSVReader(isr);
         try {
             headers = csvr.readNext();
         } catch (CsvValidationException e) {
@@ -73,8 +70,8 @@ public class TableParser {
      */
     public void close(){
         try {
-            fr.close();
-            br.close();
+            if(isr != null) isr.close();
+            if(csvr != null) csvr.close();
         } catch (IOException e) {}
     }
 }

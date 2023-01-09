@@ -13,7 +13,7 @@ import com.casamayor.raul.utils.TableParser;
 */
 public class Tables {
 
-    private static final String TABLE_PATH = "src/main/resources/files/tables.csv";
+    private static final String TABLE_PATH = "files/tables.csv";
 
     private HashMap<Integer,HashMap<String,String>> table;
     
