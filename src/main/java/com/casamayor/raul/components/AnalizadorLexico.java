@@ -53,7 +53,7 @@ public class AnalizadorLexico {
      * @return The line position of the file cursor
      */
     public int getLineNumber(){
-        return rd.getCurrentLineNumber();
+        return rd.getCurrentTokenLineNumber();
     }
 
     /**
@@ -61,7 +61,7 @@ public class AnalizadorLexico {
      * @return The content of the current line
      */
     public String getLineText(){
-        return rd.getCurrentLine();
+        return rd.getCurrentTokenLine();
     }
 
     /**

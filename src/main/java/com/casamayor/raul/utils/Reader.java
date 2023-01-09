@@ -65,6 +65,22 @@ public class Reader {
     public String getCurrentLine(){
         return lineChange ? previousLine : currentLine;
     }
+
+    /**
+     * Line number getter.
+     * @return Current line number
+     */
+    public int getCurrentTokenLineNumber(){
+        return lineCursor==0 ? prevLineCounter : lineCounter;
+    }
+
+    /**
+     * Line text getter.
+     * @return Current line number
+     */
+    public String getCurrentTokenLine(){
+        return lineCursor==0 ? previousLine : currentLine;
+    }
     
     /**
      * Method used to skip the rest of the current line

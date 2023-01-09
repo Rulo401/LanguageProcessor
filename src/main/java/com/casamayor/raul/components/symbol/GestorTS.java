@@ -21,6 +21,7 @@ public class GestorTS {
     private int offsetG, offsetL;
     private int nTable;
     private boolean zDec;
+    private int zDecEntries;
     private String associatedFun;
     
     /**
@@ -49,6 +50,9 @@ public class GestorTS {
                 return null;
             }
             ts.put(id, new STEntry());
+            if(--zDecEntries == 0){
+                zDec = false;
+            }
         }else{
             if((tsL == null || !tsL.containsKey(id)) && !tsG.containsKey(id)){
                 STEntry entry = new STEntry();
@@ -62,9 +66,12 @@ public class GestorTS {
 
     /**
      * Declaration zone setter.
+     * @param zDec Declaration zone value
+     * @param zDecEntries Declaration zone duration
      */
-    public void setZDec(boolean zDec){
+    public void setZDec(boolean zDec, Integer zDecEntries){
         this.zDec = zDec;
+        this.zDecEntries = zDecEntries == null ? -1 : zDecEntries;
     }
 
     /**

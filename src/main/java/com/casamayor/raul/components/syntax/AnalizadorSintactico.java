@@ -120,8 +120,8 @@ public class AnalizadorSintactico {
         private void pushToken(Token t){
             switch(t.getId()){
                 case Constants.TokensCode.IDENT: stack.push(new Triple<String,String,List<String>>(t.getAttribute().toString(), null, null)); break;
-                case Constants.TokensCode.PR_LET:
-                case Constants.TokensCode.PR_FUN: gts.setZDec(true);
+                case Constants.TokensCode.PR_LET: gts.setZDec(true, 1); stack.push(null); break;
+                case Constants.TokensCode.PR_FUN: gts.setZDec(true, null);
                 default: stack.push(null);
             }
         }
@@ -452,7 +452,6 @@ public class AnalizadorSintactico {
 
         //regla S -> let id T ; {zDec := false, InsertarTipoTS(id.pos,T.tipo),InsertarDesplTS(id.pos,T.ancho),S.tipo := tipo_ok}
         private void red20(){
-            gts.setZDec(false);
             stack.pop();
             stack.pop();
             stack.pop();
@@ -584,7 +583,7 @@ public class AnalizadorSintactico {
             stack.pop();
             stack.push(param);
             stack.push(null);
-            gts.setZDec(false);
+            gts.setZDec(false, null);
             //{InsertarTipoParamTS(Fun1.pos,Fun2.tipo),InsertarNParamTS(Fun1.pos,Fun2.nParam)}
             Triple<String,String,List<String>> f1 = stack.get(3);
             gts.setParameters(f1.getB(), Integer.valueOf(param.getB()), param.getC());
