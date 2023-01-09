@@ -7,15 +7,15 @@ import java.io.IOException;
 /**
  * Class used to manage the reading of the file.
  * @author Raúl Casamayor Navas
- * @version 1.3
- * @since 23/10/2022
+ * @version 1.4
+ * @since 09/01/2022
  */
 public class Reader {
 
     private FileReader fr;
     private BufferedReader br;
     
-    private int lineCounter, lineCursor;
+    private int lineCounter, prevLineCounter, lineCursor;
     private String currentLine, previousLine;
     private boolean lineChange;
 
@@ -59,7 +59,7 @@ public class Reader {
      * @return Current line number
      */
     public int getCurrentLineNumber(){
-        return lineChange ? lineCounter - 1 : lineCounter;
+        return lineChange ? prevLineCounter : lineCounter;
     }
 
     public String getCurrentLine(){
@@ -84,12 +84,17 @@ public class Reader {
     private void readNextLine() throws IOException{
         lineCursor = 0;
         previousLine = currentLine;
+        prevLineCounter = lineCounter;
         currentLine = br.readLine();
         if(currentLine != null){
             lineCounter++;
             lineChange = true;
             if(currentLine.length() == 0){
+                String saveLine = previousLine;
+                int saveLC = prevLineCounter;
                 readNextLine();
+                prevLineCounter = saveLC;
+                previousLine = saveLine;
             }
         }
     }
